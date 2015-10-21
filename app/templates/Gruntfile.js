@@ -19,18 +19,25 @@ module.exports = function(grunt) {
 
         shell: {
             run: {
-                command: 'cfx run --pkgdir=<%%= config.app %>'
+                command: [
+                    'cd <%%= config.app %>/',
+                    'jpm run' //'jpm run -b nightly'
+                ].join('&&')
             },
             xpi: {
                 command: [
-                    'cfx xpi --pkgdir=<%%= config.app %>',
+                    'cd <%%= config.app %>',
+                    'jpm xpi',
+                    'cd ..',
                     'mv <%%= config.name %>.xpi <%%= config.dist %>',
                     'wget --post-file=<%%= config.dist %>/<%%= config.name %>.xpi http://localhost:8888/ || echo>/dev/null'
                 ].join('&&')
             },
             build: {
                 command: [
-                    'cfx xpi --pkgdir=<%%= config.app %>',
+                    'cd <%%= config.app %>',
+                    'jpm xpi',
+                    'cd ..',
                     'mv <%%= config.name %>.xpi <%%= config.dist %>'
                 ].join('&&')
             }

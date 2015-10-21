@@ -2,6 +2,7 @@
     "name": "<%= appname %>",
     "id": "extensionname@example.org",
     "title": "<%= title %>",
+    "main": "lib/main.js",
     "description": "<%= description %>",
     "author": "<%= author %>",
     "license": "MPL 2.0",
